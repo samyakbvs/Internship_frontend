@@ -1,0 +1,15 @@
+.uploadBody{
+  padding-top: 0
+}
+.jumbotron{
+  margin-top: 5% !important;
+}
+.fa {
+  color: black !important;
+}
+.ops{
+  opacity: 0 !important;
+}
+#SubmitText{
+  margin-top: 10px;
+}
