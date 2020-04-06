@@ -100,6 +100,7 @@ class  SearchPost  extends  Component {
     </div>
     */}
      <div className="container">
+       <h1>Desired posts</h1>
        <div class="row">
          {this.state.posts.map( c =>
     <Card key={c.id}style={{minWidth: '18rem',margin:10,maxWidth:'18rem'}}>

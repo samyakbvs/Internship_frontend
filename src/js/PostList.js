@@ -99,6 +99,7 @@ render() {
 </div>
 */}
  <div className="container">
+   <h1>All posts</h1>
    <div class="row">
      {this.state.posts.map( c =>
 <Card key={c.id}style={{minWidth: '18rem',margin:10,maxWidth:'18rem'}}>

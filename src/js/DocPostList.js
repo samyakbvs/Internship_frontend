@@ -1,6 +1,7 @@
 import  React, { Component } from  'react';
 import  PostService  from  '../PostService';
 import {Card,Nav,Navbar,NavDropdown} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 const  postService  =  new  PostService();
 
 class  DocPostList  extends  Component {
@@ -26,7 +27,7 @@ render(){
 
     <body >
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand href="/">Home</Navbar.Brand>
+        <Link to="/"><Navbar.Brand>Home</Navbar.Brand></Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
 
@@ -100,6 +101,7 @@ render(){
     </div>
     */}
      <div className="container">
+       <h1>Doc posts</h1>
        <div class="row">
          {this.state.posts.map( c =>
     <Card key={c.id}style={{minWidth: '18rem',margin:10,maxWidth:'18rem'}}>

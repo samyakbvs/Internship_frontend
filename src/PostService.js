@@ -6,7 +6,7 @@ export default class PostService {
 
 
   getPosts(){
-    const url = `http://localhost:8000`
+    const url = `http://localhost:8000/post/`
     return axios.get(url).then(
       response => response.data
     );
@@ -14,28 +14,28 @@ export default class PostService {
   }
 
   getVideoPosts(){
-    const url = `http://localhost:8000/videos/`
+    const url = `http://localhost:8000/post/videos/`
     return axios.get(url).then(
       response => response.data
     );
   }
 
   getImagePosts(){
-    const url = `http://localhost:8000/images/`
+    const url = `http://localhost:8000/post/images/`
     return axios.get(url).then(
       response => response.data
     );
   }
 
   getDocPosts(){
-    const url = `http://localhost:8000/docs/`
+    const url = `http://localhost:8000/post/docs/`
     return axios.get(url).then(
       response => response.data
     );
   }
 
   getPost(id){
-    const url = `http://localhost:8000/${id}/`;
+    const url = `http://localhost:8000/post/${id}/`;
     return axios.get(url).then(
       response => response.data
     );
@@ -43,7 +43,7 @@ export default class PostService {
 
   createPost(post){
 
-    const url = `http://localhost:8000/create/`;
+    const url = `http://localhost:8000/post/`;
     return axios.post(url,post,{headers: {  'content-type': 'multipart/form-data'  }}).then((result)=>{
 
           if (!$("#SubmitText").hasClass("ops")) {
@@ -56,7 +56,7 @@ export default class PostService {
 
 }
   searchPosts(query){
-    const url = `http://localhost:8000/${query}/`;
+    const url = `http://localhost:8000/post/${query}/`;
     return axios.get(url).then(
       response => response.data
     );

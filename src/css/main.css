@@ -13,3 +13,6 @@
 #SubmitText{
   margin-top: 10px;
 }
+#SubmitText,#AuthorText,#DescriptionText,#NameText{
+  color: #990000 !important;
+}
