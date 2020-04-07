@@ -27,13 +27,13 @@ class  SearchPost  extends  Component {
     return(
     <body >
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand ><Link to="/account/">Home</Link></Navbar.Brand>
+        <Navbar.Brand ><Link to="/">Home</Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
 
           <Nav>
-            <Nav.Link ><Link to="/account/posts/">Docs</Link></Nav.Link>
-            <Nav.Link ><Link to="/account/Upload/">
+            <Nav.Link ><Link to="/posts/">Docs</Link></Nav.Link>
+            <Nav.Link ><Link to="/Upload/">
               Upload
             </Link></Nav.Link>
 
@@ -51,9 +51,9 @@ class  SearchPost  extends  Component {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item ><Link to="/account/posts/videos/">Videos</Link></Dropdown.Item>
-        <Dropdown.Item ><Link to="/account/posts/images/">Images</Link></Dropdown.Item>
-        <Dropdown.Item ><Link to="/account/posts/doc/">Docs</Link></Dropdown.Item>
+        <Dropdown.Item ><Link to="/posts/videos/">Videos</Link></Dropdown.Item>
+        <Dropdown.Item ><Link to="/posts/images/">Images</Link></Dropdown.Item>
+        <Dropdown.Item ><Link to="/posts/doc/">Docs</Link></Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
      <div className="container">

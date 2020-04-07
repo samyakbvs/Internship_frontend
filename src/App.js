@@ -23,14 +23,14 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 const  BaseLayout  = () => (
 <div  className="container-fluid">
     <div  className="content">
-        <Route  path="/account/"  exact  component={Homepage}  />
-        <Route  path="/account/posts/"  exact  component={PostList}  />
-        <Route  path="/account/posts/videos"  exact  component={VideoPostList}  />
-        <Route  path="/account/posts/images"  exact  component={ImagePostList}  />
-        <Route  path="/account/posts/doc"  exact  component={DocPostList}  />
-        <Route  path="/account/post/:id"  exact  component={ViewPost}  />
-        <Route  path="/account/upload"  exact  component={UploadPost}  />
-        <Route  path="/account/searchPost/:query"  exact  component={SearchPost}  />
+        <Route  path="/"  exact  component={Homepage}  />
+        <Route  path="/posts/"  exact  component={PostList}  />
+        <Route  path="/posts/videos"  exact  component={VideoPostList}  />
+        <Route  path="/posts/images"  exact  component={ImagePostList}  />
+        <Route  path="/posts/doc"  exact  component={DocPostList}  />
+        <Route  path="/post/:id"  exact  component={ViewPost}  />
+        <Route  path="/upload"  exact  component={UploadPost}  />
+        <Route  path="/searchPost/:query"  exact  component={SearchPost}  />
     </div>
 </div>
 )

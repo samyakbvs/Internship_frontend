@@ -162,13 +162,13 @@ if (this.state.Name === '') {
 
 
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Navbar.Brand ><Link to="/account/">Home</Link></Navbar.Brand>
+      <Navbar.Brand ><Link to="/">Home</Link></Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
 
         <Nav>
-          <Nav.Link ><Link to="/account/posts/">Docs</Link></Nav.Link>
-          <Nav.Link ><Link to="/account/Upload/">
+          <Nav.Link ><Link to="/posts/">Docs</Link></Nav.Link>
+          <Nav.Link ><Link to="/Upload/">
             Upload
           </Link></Nav.Link>
         </Nav>
