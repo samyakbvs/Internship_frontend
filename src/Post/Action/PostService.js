@@ -61,18 +61,15 @@ export default class PostService {
       response => response.data
     );
   }
-
-  login(login_credentials){
-
+  login(creds){
+console.log(creds)
     const url = `http://localhost:8000/post/login/`;
-    return axios.post(url,login_credentials,{headers: {  'content-type': 'multipart/form-data'  }}).then((result)=>{
-
-
+    return axios.post(url,creds,{headers: {  'content-type': 'multipart/form-data'  }}).then((result)=>{
 
         }).catch(()=>{
-
         });
 
 }
+
 
 }

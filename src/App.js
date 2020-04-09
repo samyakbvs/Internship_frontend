@@ -9,6 +9,7 @@ import DocPostList from './Post/Components/DocPostList'
 import ViewPost from './Post/Components/ViewPost'
 import UploadPost from './Post/Components/UploadPost'
 import SearchPost from './Post/Components/SearchPosts'
+import Login from './Post/Components/Login'
 // import Login from './Post/Components/Login'
 import  './App.css';
 
@@ -24,6 +25,7 @@ const  BaseLayout  = () => (
 <div  className="container-fluid">
     <div  className="content">
         <Route  path="/"  exact  component={Homepage}  />
+        <Route  path="/login"  exact  component={Login}  />
         <Route  path="/posts/"  exact  component={PostList}  />
         <Route  path="/posts/videos"  exact  component={VideoPostList}  />
         <Route  path="/posts/images"  exact  component={ImagePostList}  />
