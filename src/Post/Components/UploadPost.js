@@ -143,7 +143,7 @@ console.log(this.state)
 postService.createPost(form_data)
 
   e.preventDefault()
-
+  this.props.history.push("/posts/")
 
 
 
@@ -156,7 +156,7 @@ onChangeHandler=event=>{
 
 
 render() {
-if (this.state.Name === '') {
+
 
     return (
 
@@ -285,11 +285,6 @@ if (this.state.Name === '') {
 
   );
 
-} else {
-    return (
-  <h1> Sorry this service is only available for admin users</h1>
-  );
-}
 
   }
 }

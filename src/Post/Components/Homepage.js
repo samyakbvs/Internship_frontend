@@ -64,8 +64,8 @@ class  Homepage  extends  Component {
     </Form.Group>
 
 
-    <Button variant="primary" to={"/searchPost/" + this.state.Query}>
-      Submit
+    <Button variant="primary" >
+      <Link id="search"to={"/searchPost/" + this.state.Query}>Submit</Link>
     </Button>
   </Form>
 </div>
