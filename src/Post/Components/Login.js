@@ -1,6 +1,9 @@
 import  React, { Component } from  'react';
 import  PostService  from  '../Action/PostService';
-import {Link} from 'react-router-dom'
+import {Link,withRouter} from 'react-router-dom'
+import { connect } from 'react-redux';
+
+import * as actions from '../../store/actions/auth';
 import {Card,Nav,Navbar,NavDropdown} from 'react-bootstrap'
 import {Form,Button} from 'react-bootstrap'
 const  postService  =  new  PostService();
@@ -9,9 +12,10 @@ class  Login  extends  Component {
   constructor(props) {
       super(props);
       this.state = {
-        Username: "",
-        Password:"",
-        };
+  username: "",
+  password:"",
+  };
+
   }
 
 
@@ -21,17 +25,26 @@ class  Login  extends  Component {
   }
 
   handleSubmit = (e) => {
+    e.preventDefault()
+    this.props.onAuth(this.state.username, this.state.password, false)
+    // this.props.history.push('/')
+    // let form_data = new FormData();
+    //
+    // form_data.append('username', this.state.username);
+    // form_data.append('password', this.state.password);
+    // for (var key of form_data.entries()) {
+    //     console.log(key[0] + ', ' + key[1]);
+    // }
+    // postService.login(form_data)
 
-    let form_data = new FormData();
-
-    form_data.append('username', this.state.username);
-    form_data.append('password', this.state.password);
-    for (var key of form_data.entries()) {
-        console.log(key[0] + ', ' + key[1]);
-    }
-    postService.login(form_data)
-      e.preventDefault()
   };
+  // handleSubmit = (e) => {
+  //     e.preventDefault();
+  //     this.props.form.validateFields((err, values) => {
+  //         if (!err) this.props.onAuth(values.username, values.password, false);
+  //     });
+  //     this.props.history.push('/');
+  // }
 
   handleChange = (e) => {
     this.setState({
@@ -39,38 +52,52 @@ class  Login  extends  Component {
     })
   };
   render() {
+    let errorMessage = null;
+    if (this.props.error) {
+        errorMessage = (
+            <p>{this.props.error.message}</p>
+        );
+    }
 
     return (
     <body>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Navbar.Brand ><Link to="/">Home</Link></Navbar.Brand>
+
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
 
         <Nav>
-          <Nav.Link ><Link to="/posts/">Docs</Link></Nav.Link>
-          <Nav.Link ><Link to="/Upload/">
-            Upload
+          <Nav.Link ><Link to="/">Login</Link></Nav.Link>
+          <Nav.Link ><Link to="/Signup">
+            SignUp
           </Link></Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
       <div className="jumbotron container ">
-      <h1>Login</h1>
-      <br />
-      <Form onSubmit={this.handleSubmit}>
-    <Form.Group controlId="formBasicEmail">
-<Form.Control autocomplete="off" id="username"onChange={this.handleChange} type="text" placeholder="Username" />
+        {errorMessage}
+        {
+          this.props.loading ?
+          <h1>Logging in...</h1>
+            :
+<div>
+          <h1>Login</h1>
+          <br />
+          <Form onSubmit={this.handleSubmit}>
+        <Form.Group controlId="formBasicEmail">
+    <Form.Control autocomplete="off" id="username"onChange={this.handleChange} type="text" placeholder="Username" />
+    <br />
+          <Form.Control autocomplete="off" id="password"onChange={this.handleChange} type="password" placeholder="Password" />
 <br />
-      <Form.Control autocomplete="off" id="password"onChange={this.handleChange} type="text" placeholder="Password" />
-
-    </Form.Group>
+        </Form.Group>
 
 
-    <Button variant="primary" type="submit">
-      Submit
-    </Button>
-  </Form>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+    </Form>
+  </div>
+}
 </div>
 
           </body>);
@@ -78,4 +105,20 @@ class  Login  extends  Component {
 
 }
 
-export  default  Login;
+const mapStateToProps = state => {
+    return {
+        loading: state.loading,
+        error: state.error
+    };
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: (username, password) => dispatch(actions.authLogin(username, password))
+    }
+}
+
+
+
+
+export  default  withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

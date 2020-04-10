@@ -1,7 +1,10 @@
 import  React, { Component } from  'react';
 import  PostService  from  '../Action/PostService';
 import {Form,Button,Navbar,Nav} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import {Link,withRouter} from 'react-router-dom'
+import { connect } from 'react-redux';
+
+import * as actions from '../../store/actions/auth';
 const  postService  =  new  PostService();
 
 class  ViewPost  extends  Component {
@@ -42,6 +45,9 @@ postService.getPost(params.id).then(function (result) {
             <Nav.Link ><Link to="/Upload/">
               Upload
             </Link></Nav.Link>
+            <Nav.Link onClick={this.props.logout} >
+                <Link to="/">Logout</Link>
+              </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -87,4 +93,11 @@ postService.getPost(params.id).then(function (result) {
 
 }
 
-export  default  ViewPost;
+const mapDispatchToProps = dispatch => {
+	return {
+		logout: () => dispatch(actions.logout())
+
+	};
+};
+
+export default withRouter(connect(null, mapDispatchToProps)(ViewPost));

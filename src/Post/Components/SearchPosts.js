@@ -1,7 +1,10 @@
 import  React, { Component } from  'react';
 import  PostService  from  '../Action/PostService';
 import {Card,Nav,Navbar,NavDropdown,Dropdown} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import {Link,withRouter} from 'react-router-dom'
+import { connect } from 'react-redux';
+
+import * as actions from '../../store/actions/auth';
 import {Form,Button} from 'react-bootstrap'
 const  postService  =  new  PostService();
 class  SearchPost  extends  Component {
@@ -36,6 +39,9 @@ class  SearchPost  extends  Component {
             <Nav.Link ><Link to="/Upload/">
               Upload
             </Link></Nav.Link>
+            <Nav.Link onClick={this.props.logout} >
+                <Link to="/">Logout</Link>
+              </Nav.Link>
 
 
           </Nav>
@@ -83,4 +89,10 @@ class  SearchPost  extends  Component {
 
 }
 
-export  default  SearchPost;
+const mapDispatchToProps = dispatch => {
+	return {
+		logout: () => dispatch(actions.logout())
+	};
+};
+
+export default withRouter(connect(null, mapDispatchToProps)(SearchPost));

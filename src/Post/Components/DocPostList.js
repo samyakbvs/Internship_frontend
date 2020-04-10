@@ -1,7 +1,10 @@
 import  React, { Component } from  'react';
 import  PostService  from  '../Action/PostService';
 import {Card,Nav,Navbar,NavDropdown,Dropdown} from 'react-bootstrap'
-import {Link} from 'react-router-dom'
+import {Link,withRouter} from 'react-router-dom'
+import { connect } from 'react-redux';
+
+import * as actions from '../../store/actions/auth';
 const  postService  =  new  PostService();
 
 class  DocPostList  extends  Component {
@@ -37,7 +40,9 @@ render(){
               Upload
             </Link></Nav.Link>
 
-
+            <Nav.Link onClick={this.props.logout} >
+                <Link to="/">Logout</Link>
+              </Nav.Link>
           </Nav>
         </Navbar.Collapse>
         </Navbar>
@@ -81,4 +86,10 @@ render(){
 
 }
 
-export  default  DocPostList;
+const mapDispatchToProps = dispatch => {
+	return {
+		logout: () => dispatch(actions.logout())
+	};
+};
+
+export default withRouter(connect(null, mapDispatchToProps)(DocPostList));

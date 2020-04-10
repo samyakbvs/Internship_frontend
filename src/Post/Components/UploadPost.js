@@ -1,7 +1,10 @@
 import  React, { Component } from  'react';
 import  PostService  from  '../Action/PostService';
 import $ from 'jquery';
-import {Link} from 'react-router-dom'
+import {Link,withRouter} from 'react-router-dom'
+import { connect } from 'react-redux';
+
+import * as actions from '../../store/actions/auth';
 import {Form,Col,Button,Navbar,Nav,NavDropdown,InputGroup} from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -171,6 +174,9 @@ if (this.state.Name === '') {
           <Nav.Link ><Link to="/Upload/">
             Upload
           </Link></Nav.Link>
+          <Nav.Link onClick={this.props.logout} >
+              <Link to="/">Logout</Link>
+            </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
@@ -287,4 +293,10 @@ if (this.state.Name === '') {
 
   }
 }
-export default UploadPost;
+const mapDispatchToProps = dispatch => {
+	return {
+		logout: () => dispatch(actions.logout())
+	};
+};
+
+export default withRouter(connect(null, mapDispatchToProps)(UploadPost));

@@ -1,6 +1,9 @@
 import  React, { Component } from  'react';
 import  PostService  from  '../Action/PostService';
-import {Link} from 'react-router-dom'
+import {Link,withRouter} from 'react-router-dom'
+import { connect } from 'react-redux';
+
+import * as actions from '../../store/actions/auth';
 import {Card,Nav,Navbar,NavDropdown} from 'react-bootstrap'
 import {Form,Button} from 'react-bootstrap'
 const  postService  =  new  PostService();
@@ -17,6 +20,7 @@ class  Homepage  extends  Component {
 
   componentDidMount() {
     var self = this;
+
 
   }
 
@@ -40,6 +44,9 @@ class  Homepage  extends  Component {
           <Nav.Link ><Link to="/Upload/">
             Upload
           </Link></Nav.Link>
+          <Nav.Link onClick={this.props.logout} >
+              <Link to="/">Logout</Link>
+            </Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
@@ -68,4 +75,10 @@ class  Homepage  extends  Component {
 
 }
 
-export  default  Homepage;
+const mapDispatchToProps = dispatch => {
+	return {
+		logout: () => dispatch(actions.logout())
+	};
+};
+
+export default withRouter(connect(null, mapDispatchToProps)(Homepage));
