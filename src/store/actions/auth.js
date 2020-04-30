@@ -7,10 +7,11 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = token => {
+export const authSuccess = (token,is_staff) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
-        token: token
+        token: token,
+        is_staff:is_staff
     };
 };
 
@@ -31,6 +32,7 @@ export const checkAuthTimeout = expirationTime => {
 
 export const logout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('is_staff');
     localStorage.removeItem('expirationDate');
     return {
         type: actionTypes.AUTH_LOGOUT
@@ -46,10 +48,12 @@ export const authLogin = (username, password) => {
         })
         .then(res => {
             const token = res.data.key;
+            const is_staff = res.data.user.is_staff;
             const expirationDate = new Date(new Date().getTime() + 3600 * 1000); // 1 hour
             localStorage.setItem('token', token);
+            localStorage.setItem('is_staff', is_staff);
             localStorage.setItem('expirationDate', expirationDate);
-            dispatch(authSuccess(token));
+            dispatch(authSuccess(token,is_staff));
             dispatch(checkAuthTimeout(3600));
         })
         .catch(err => {
@@ -69,10 +73,12 @@ export const authSignup = (username, email, password1, password2) => {
         })
         .then(res => {
             const token = res.data.key;
+            const is_staff = res.data.user.is_staff;
             const expirationDate = new Date(new Date().getTime() + 3600 * 1000); // 1 hour
             localStorage.setItem('token', token);
+            localStorage.setItem('is_staff', is_staff);
             localStorage.setItem('expirationDate', expirationDate);
-            dispatch(authSuccess(token));
+            dispatch(authSuccess(token,is_staff));
             dispatch(checkAuthTimeout(3600));
         })
         .catch(err => {
@@ -84,6 +90,7 @@ export const authSignup = (username, email, password1, password2) => {
 export const authCheckState = () => {
     return dispatch => {
         const token = localStorage.getItem('token');
+        const is_staff = localStorage.getItem('is_staff');
         if (token === undefined) {
             dispatch(logout());
         } else {
@@ -91,7 +98,7 @@ export const authCheckState = () => {
             if ( expirationDate <= new Date() ) {
                 dispatch(logout());
             } else {
-                dispatch(authSuccess(token));
+                dispatch(authSuccess(token,is_staff));
                 dispatch(checkAuthTimeout( ( expirationDate.getTime() - new Date().getTime() ) / 1000 ));
             }
         }

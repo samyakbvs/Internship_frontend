@@ -3,9 +3,6 @@ import { BrowserRouter } from  'react-router-dom'
 import { Route, Link } from  'react-router-dom'
 import  PostList  from  './Post/Components/PostList'
 import Homepage from './Post/Components/Homepage'
-import VideoPostList from './Post/Components/VideoPostList'
-import ImagePostList from './Post/Components/ImagePostList'
-import DocPostList from './Post/Components/DocPostList'
 import ViewPost from './Post/Components/ViewPost'
 import UploadPost from './Post/Components/UploadPost'
 import SearchPost from './Post/Components/SearchPosts'
@@ -31,14 +28,17 @@ class BaseLayout extends React.Component {
   {this.props.isAuthenticated ?
 
     <div  className="content">
-          <Route  path="/"  exact  component={Homepage}  />
-        <Route  path="/posts/"  exact  component={PostList}  />
-        <Route  path="/posts/videos"  exact  component={VideoPostList}  />
-        <Route  path="/posts/images"  exact  component={ImagePostList}  />
-        <Route  path="/posts/doc"  exact  component={DocPostList}  />
-        <Route  path="/post/:id"  exact  component={ViewPost}  />
-        <Route  path="/upload"  exact  component={UploadPost}  />
-        <Route  path="/searchPost/:query"  exact  component={SearchPost}  />
+          <Route  {...this.props}path="/"  exact  component={(props) => <Homepage {...this.props}  />}/>
+
+        <Route  {...this.props}path="/posts/"  exact  component={(props) => <PostList {...this.props}  />}  />
+        <Route {...this.props} path="/post/:id"  exact  component={(props) => <ViewPost {...this.props}  />}  />
+        { this.props.isStaff ?
+          <Route  {...this.props}path="/upload"  exact  component={(props) => <UploadPost {...this.props}  />}  />
+
+          :
+          <span/>
+        }
+        <Route  {...this.props}path="/searchPost/:query"  exact  component={(props) => <SearchPost {...this.props}  />}  />
         </div>
         :
         <div  className="content">
@@ -76,7 +76,8 @@ render() {
 
 const mapStateToProps = state => {
 	return {
-		isAuthenticated: state.token !== null
+		isAuthenticated: state.token !== null,
+    isStaff: state.is_staff
 	};
 };
 

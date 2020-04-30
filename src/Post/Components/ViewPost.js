@@ -36,18 +36,25 @@ postService.getPost(params.id).then(function (result) {
     return (
       <div>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Navbar.Brand><Link to="/">Home</Link></Navbar.Brand>
+        <Navbar.Brand ><Link to="/">Home</Link></Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
+        <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav">
 
           <Nav>
             <Nav.Link ><Link to="/posts/">Docs</Link></Nav.Link>
-            <Nav.Link ><Link to="/Upload/">
-              Upload
-            </Link></Nav.Link>
+              {this.props.isStaff ?
+               <Nav.Link ><Link to="/Upload/">Upload</Link></Nav.Link>
+               :
+               <span/>
+
+              }
             <Nav.Link onClick={this.props.logout} >
                 <Link to="/">Logout</Link>
               </Nav.Link>
+              <Nav.Link className="version" >
+                v 1.0
+                </Nav.Link>
+
           </Nav>
         </Navbar.Collapse>
       </Navbar>

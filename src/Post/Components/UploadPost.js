@@ -143,7 +143,7 @@ console.log(this.state)
 postService.createPost(form_data)
 
   e.preventDefault()
-  this.props.history.push("/posts/")
+  // this.props.history.push("/posts/")
 
 
 
@@ -167,16 +167,23 @@ render() {
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Navbar.Brand ><Link to="/">Home</Link></Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-      <Navbar.Collapse id="responsive-navbar-nav">
+      <Navbar.Collapse className="justify-content-end" id="responsive-navbar-nav">
 
         <Nav>
           <Nav.Link ><Link to="/posts/">Docs</Link></Nav.Link>
-          <Nav.Link ><Link to="/Upload/">
-            Upload
-          </Link></Nav.Link>
+            {this.props.isStaff ?
+             <Nav.Link ><Link to="/Upload/">Upload</Link></Nav.Link>
+             :
+             <span/>
+
+            }
           <Nav.Link onClick={this.props.logout} >
               <Link to="/">Logout</Link>
             </Nav.Link>
+            <Nav.Link className="version" >
+              v 1.0
+              </Nav.Link>
+
         </Nav>
       </Navbar.Collapse>
     </Navbar>
@@ -185,7 +192,7 @@ render() {
 
 
     <Form style={{marginTop:50,padding:30}} onSubmit =  {this.handleSubmit}>
-  <h1> Upload material</h1>
+  <h2> Upload (video / image / document)</h2>
   <br/>
       <Form.Row>
         <Form.Group as={Col} >
@@ -233,7 +240,7 @@ render() {
 
            label="Video"
            data-browse="Add"
-            accept=".mp4,.mkv,.avi"
+            accept=".mp4,.mkv,.avi,.mov"
            custom
          />
         </Form.Group>
